@@ -1,0 +1,12 @@
+#!/bin/sh
+host=$1
+status=$2
+
+{{ utils_directory }}/monitoring/rcron_monitor $host
+if [ \( $? -eq 1 -a $status = "BACKUP" \) -o \( $? -eq 0 -a $status = "MASTER" \) ] ; then 
+	echo "active" > /home/{{ user }}/rcron/state;
+else 
+	echo "passive" > /home/{{ user }}/rcron/state;
+fi
+
+exit 0;

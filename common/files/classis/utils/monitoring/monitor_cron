@@ -1,0 +1,5 @@
+*/10 * * * * {{ user }} bash {{ utils_directory }}/monitoring/apache_monitor >> /dev/null 2>&1
+
+* */10 * * * {{ user }} bash {{ utils_directory }}/utils/monitoring/disk_space_monitor >> /dev/null 2>&1
+
+*/1 * * * * {{ user }} {{ utils_directory }}/utils/monitoring/keep_alive_monitor {{ slave_ip }} MASTER >> /dev/null 2>&1

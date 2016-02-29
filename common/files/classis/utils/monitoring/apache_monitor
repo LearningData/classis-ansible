@@ -1,0 +1,15 @@
+#!/bin/bash
+email={{ administrator_email }}
+#ccemail={{ secondary_administrator_email }}
+url={{ classis_url }}/monitor.html
+
+if curl -s --head $url --insecure | grep "200 OK" > /dev/null
+  then 
+    echo "The HTTP server is up!" > /dev/null
+    echo 1
+  else
+    echo "Apache is down" | mail -s "Classis Apache failure" -a "From: $HOSTNAME@classis.co.uk" $email
+    echo "The HTTP server is down!" > /dev/null
+    echo 0
+fi
+exit 0 

@@ -1,0 +1,23 @@
+#!/bin/bash
+host=$1
+timeout=10
+
+result=$(mysql -u test --connect-timeout=$timeout -h $host test -s<< EOF
+	DELETE FROM test WHERE test=1;
+	INSERT INTO test VALUES(1);
+	SELECT test FROM test WHERE test=1 LIMIT 1;
+EOF
+)
+
+read result <<< $result
+
+if [ "$result" = "1" ]; then
+	mysql -u test -h $host test -s<< EOF
+		DELETE FROM test WHERE test=1;
+EOF
+
+	exit 0;
+else
+	exit 1;
+fi
+

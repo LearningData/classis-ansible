@@ -1,0 +1,19 @@
+#! /bin/sh
+TODAY=`(set \`date\`; echo $1)`
+FILEPATH="{{ database_dumps_directory }}"
+CONFILE="class.conf"
+
+cd $FILEPATH
+
+exec 3<$CONFILE
+
+while read dbn <&3
+ do
+
+        /usr/bin/mysqldump --ignore-table $dbn.message_event --password$DB_PASS -u {{ db_user }} $dbn > daily$dbn.sql
+
+ done
+
+exec 3>&-
+
+exit 0

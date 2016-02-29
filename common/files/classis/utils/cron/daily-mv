@@ -1,0 +1,19 @@
+#! /bin/sh
+TODAY=`(set \`date\`; echo $1)`
+FILEPATH="{{ database_dumps_directory }}"
+CONFILE="class.conf"
+
+cd $FILEPATH
+
+exec 3<$CONFILE
+while read dbn <&3
+ do
+
+        tar --remove-files -cf $dbn$TODAY.tar daily$dbn.sql
+        mv -f $dbn$TODAY.tar.gz $dbn$TODAY-0.tar.gz
+        gzip $dbn$TODAY.tar
+ done
+
+exec 3>&-
+
+exit 0

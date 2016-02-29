@@ -1,0 +1,22 @@
+- name: Create eportfolio dir
+  file: path={{ eportfolio_directory }} state=directory
+
+- name: Create templates dir
+  file: path={{ templates_directory }} state=directory
+
+- name: Clone classis
+  file: path={{ classis_directory }} state=directory
+
+- name: Create logs dir
+  file: path={{ logs_directory }} state=directory
+
+- name: Create utils dir
+  file: path={{ utils_directory }} state=directory
+
+- name: Create dumps dir
+  file: path={{ dumps_directory }} state=directory
+
+- name: Copy dumps files to dumps dir
+  synchronise: dest={{ dumps_directory }} src=files/dumps recursive=yes
+
+

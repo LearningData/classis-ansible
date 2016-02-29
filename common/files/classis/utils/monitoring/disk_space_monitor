@@ -1,0 +1,14 @@
+#!/bin/bash
+email={{ administrator_email }}
+#ccemail={{ secondary_administrator_email }}
+threshold=84
+
+CURRENT=$(df / | grep / | awk '{ print $5}' | sed 's/%//g')
+
+if [ "$CURRENT" -gt "$threshold" ] ; then
+	echo "Partition remaining free space is critically low. Used: $CURRENT%" | mail -s 'Classis Disk Space Alert' -a "From: $HOSTNAME@classis.co.uk" $email
+	echo 0
+else 
+	echo 1
+fi
+exit 0

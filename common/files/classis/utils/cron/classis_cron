@@ -1,0 +1,4 @@
+#school classis cron
+*/8  *   * * *    www-data  /usr/local/bin/rcron --conf /etc/rcron/rcron.conf  /usr/bin/php {{ application_directory }}/classis/scripts/cron.php --path={{ application_directory }}/classis
+#27 22   * * *     www-data  /usr/local/bin/rcron --conf /etc/rcron/rcron.conf  /usr/bin/php {{ application_directory }}/classis/classnew/scripts/cron.php --path={{ application_directory }}/classis --option=dbsync
+
