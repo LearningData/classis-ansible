@@ -14,6 +14,6 @@ $dbuser='{{ db_user }}';
 $dbpass='{{ db_pass }}';
 $basepath='';
 $dbname='phpmyadmin';
-$dbserver='{{ db_server }}';
+$dbserver='{{ db_host }}';
 $dbport='{{ db_port }}';
 $dbtype='mysql';

@@ -1,22 +1,42 @@
-- name: Create eportfolio dir
-  file: path={{ eportfolio_directory }} state=directory
+- name: Create application directory
+  file: dest={{ application_directory }} state=directory follow=yes
 
-- name: Create templates dir
-  file: path={{ templates_directory }} state=directory
+- name: Setup the Classis git repo
+  become: no
+  git: repo={{ repository  }} dest={{ application_directory }}/{{ classis_directory }} accept_hostkey=yes update=no
 
-- name: Clone classis
-  file: path={{ classis_directory }} state=directory
+- name: Copy toplevel images
+  command: cp -pr {{ application_directory }}/{{ classis_directory }}/install/toplevel/images {{ application_directory }}/ creates={{ application_directory }}/images
 
-- name: Create logs dir
-  file: path={{ logs_directory }} state=directory
+- name: Copy toplevel templates
+  command: cp -pr {{ application_directory }}/{{ classis_directory }}/install/toplevel/templates {{ application_directory }}/ creates={{ application_directory }}/templates
 
-- name: Create utils dir
-  file: path={{ utils_directory }} state=directory
+- name: Copy toplevel curriculum
+  command: cp -pr {{ application_directory }}/{{ classis_directory }}/install/toplevel/curriculum {{ application_directory }}/ creates={{ application_directory }}/curriculum
 
-- name: Create dumps dir
-  file: path={{ dumps_directory }} state=directory
+- name: Copy toplevel schoollang
+  command: cp -p {{ application_directory }}/{{ classis_directory }}/install/toplevel/schoollang.php {{ application_directory }}/
 
-- name: Copy dumps files to dumps dir
-  synchronise: dest={{ dumps_directory }} src=files/dumps recursive=yes
+- name: Copy toplevel schoolarrays
+  command: cp -p {{ application_directory }}/{{ classis_directory }}/install/toplevel/schoolarrays.php {{ application_directory }}/
 
+- name: Copy toplevel index
+  command: cp -p {{ application_directory }}/{{ classis_directory }}/install/toplevel/index.php {{ application_directory }}/
 
+- name: Create db_connect
+  template: dest={{ application_directory }}/dbh_connect.php src=common/files/classis/config/dbh_connect.php
+
+- name: Create school.php
+  template: dest={{ application_directory }}/school.php src=common/files/classis/config/school.php
+
+- name: Copy default eportfolio directory
+  synchronize: dest={{ eportfolio_directory }} src=common/files/classis/eportfolio/ recursive=yes
+
+- name: Create utils directory
+  file: dest={{ utils_directory }} state=directory follow=yes
+
+- name: Copy default utils mandrill directory
+  synchronize: dest={{ utils_directory }}/ src=common/files/classis/utils/mandrill recursive=yes
+
+- name: Copy default utils esendex directory
+  synchronize: dest={{ utils_directory }}/ src=common/files/classis/utils/esendex-php-sdk recursive=yes

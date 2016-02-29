@@ -1,6 +1,6 @@
 # MAIN DEPENDENCIES
 - name: apt-get update
-  command: apt-get update
+  action: apt update_cache=yes
 
 - name: add build-essential
   action: apt name=build-essential
@@ -17,3 +17,5 @@
 - name: add libcurl3
   action: apt name=libcurl3
 
+- name: add libxrender1
+  action: apt name=libxrender1

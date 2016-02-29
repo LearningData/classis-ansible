@@ -2,15 +2,16 @@
 
 #Default values for development
 
-environment: development
+environ: development
 administrator_email: vagrant@localhost
-application_directory: /Projects/devclass
+devclass_directory: devclassis
+application_directory: /Projects/devclassis
 eportfolio_directory: /Projects/epfdata
 templates_directory: /Projects/devclass/templates
 classis_directory: classis
 database_backup_directory: /tmp
 logs_directory: /Projects/epfdata
-utils_directory: /Porjects/utils
+utils_directory: /Projects/utils
 http_port: 80
 https_port: 443
 apache_site: 000-default.conf
@@ -22,10 +23,12 @@ slave_server_ip: 0.0.0.0
 master_server_ip: 127.0.01
 host: 127.0.0.1
 user: vagrant
+db_host: 127.0.0.1
 db_name: classis
 db_user: root
 db_pass: 
+db_port: 3306
 school_name: Classis for Development
 password_short_keyword: guest
 application_url: localhost:8080
-
+repository: git@github.com:LearningData/classis.git

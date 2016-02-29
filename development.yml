@@ -1,11 +1,12 @@
 - hosts: all
   user: vagrant
-  sudo: yes
-  vars:
-    application_directory: /Projects
+  become: yes
   tasks:
-    - include: tasks/main.yml
-    - include: tasks/shell.yml
-    - include: tasks/database.yml
-    - include: tasks/php.yml
-    - include: tasks/apache.yml
+    - include_vars: vars/development.yml
+    - include: common/tasks/main.yml
+    - include: common/tasks/shell.yml
+    - include: development/tasks/database.yml
+    - include: common/tasks/php.yml
+    - include: common/tasks/pear.yml
+    - include: common/tasks/apache.yml
+    - include: common/tasks/classis.yml

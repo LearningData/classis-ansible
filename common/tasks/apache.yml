@@ -7,14 +7,16 @@
   action: apt name=libapache2-mod-php5
 
 - name: copy apache config file
-  template: dest=/etc/apache2/sites-available/ src=files/apache/{{ apache_site }}.conf
+  template: dest=/etc/apache2/sites-available/{{ apache_site }} src=development/files/apache/{{ apache_site }}
 
 - name: copy phpmyadmin config file
-  copy: dest=/etc/apache2/conf-enabled/phpmyadmin.conf src=files/phpmyadmin/phpmyadmin.conf
+  template: dest=/etc/apache2/conf-enabled/phpmyadmin.conf src=common/files/phpmyadmin/phpmyadmin.conf
 
 - name: Enable rewrite
   command: a2enmod rewrite
 
-- name: Restart apache
-  command: service apache2 restart
+- name: Enable site
+  command: a2ensite {{ apache_site }}
+
+- service: name=apache2 state=restarted
 

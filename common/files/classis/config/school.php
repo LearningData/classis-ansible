@@ -23,9 +23,9 @@ $CFG->sitepath='/';
 /*flag 'up' or 'down' to prevent any user logins*/
 $CFG->sitestatus='up';
 /*the path to the top-level site directory*/
-$CFG->installpath='{{ application_path }}';
+$CFG->installpath='{{ application_directory }}';
 /*almost always just class*/
-$CFG->applicationdirectory='classis';
+$CFG->applicationdirectory='{{ classis_directory }}';
 /*applicationdirectory for the new class theme*/
 $CFG->theme20='';
 /* define system wide properties for a diferent type of school */
@@ -264,8 +264,8 @@ $CFG->schoolbag_api_key='';
  *
  */
 $CFG->debug='off';
-$CFG->classlog='{{ logs_dir }}/classerrors.xml';
-$CFG->serverlog='{{ logs_dir }}/myerrors.html';
+$CFG->classlog='{{ logs_directory }}/classerrors.xml';
+$CFG->serverlog='{{ logs_directory }}/myerrors.html';
 
 if(isset($_COOKIE['theme']) and $_COOKIE['theme']==$CFG->theme20){$CFG->theme10=$CFG->applicationdirectory;$CFG->applicationdirectory=$CFG->theme20;}
 ?>

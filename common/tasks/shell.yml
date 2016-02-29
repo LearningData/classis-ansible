@@ -1,3 +1,3 @@
-- name: copy up .bashrc
-  sudo: no
-  copy: dest=~/.bashrc src=files/bashrc
+- name: copy .bashrc to home dir
+  become: no
+  template: dest=~/.bashrc src=common/files/bashrc

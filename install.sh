@@ -1,4 +1,7 @@
 #!/bin/bash
+
+#sudo apt-get install -y ansible
+
 echo "Environment: production or development?"
 read env
 
@@ -25,7 +28,7 @@ if  [ "$env" == "production" ]; then
 	echo "Creating the production vars file for Ansible templates..."
 
 	echo "---" > "$config"
-	echo "environment: $env" >> "$config"
+	echo "environ: $env" >> "$config"
 	echo "administrator_email: $administrator_email" >> "$config"
 	echo "application_directory: $application_directory" >> "$config"
 	echo "eportfolio_directory: $eportfolio_directory" >> "$config"
@@ -57,7 +60,7 @@ if  [ "$env" == "production" ]; then
 elif  [ "$env" == "development" ]; then
 	echo "Installing VirtualBox, Vagrant and Capistrano for development."
 
-	#sudo apt-get install -y virtualbox vagrant capistrano
+	#sudo apt-get install -y virtualbox vagrant capistrano git
 
 	echo "Initiating the vagrant box with ansible provision."
 	vagrant up
