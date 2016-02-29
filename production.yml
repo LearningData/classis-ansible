@@ -1,0 +1,14 @@
+- hosts: all
+  user: user
+  sudo: yes
+  vars:
+    application_directory: /home
+    certificate_file_path: /tmp/test.crt
+    certificate_key_file_path: /tmp/test.key
+    administrator_email: email@email.com
+  tasks:
+    - include: tasks/main.yml
+    - include: tasks/shell.yml
+    - include: tasks/database.yml
+    - include: tasks/php.yml
+    - include: tasks/apache.yml
