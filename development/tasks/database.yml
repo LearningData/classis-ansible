@@ -1,0 +1,21 @@
+# MYSQL
+- name: Install MySQL
+  action: apt name=mysql-server
+
+- name: copy my.cnf file
+  copy: dest=/etc/mysql/ src=development/files/my.cnf
+
+- name: Root permissions
+  command: mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"
+
+- name: Create classis
+  command: mysql -u root -e "CREATE DATABASE IF NOT EXISTS classis;"
+
+- name: Root permissions
+  command: mysql -u root -e "GRANT ALL PRIVILEGES ON test.* TO 'test'@'%' WITH GRANT OPTION;"
+
+- name: Create classis
+  command: mysql -u root -e "CREATE DATABASE IF NOT EXISTS test;"
+
+- name: Restart mysql
+  command: service mysql restart

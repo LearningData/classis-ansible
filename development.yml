@@ -1,0 +1,11 @@
+- hosts: all
+  user: vagrant
+  sudo: yes
+  vars:
+    application_directory: /Projects
+  tasks:
+    - include: tasks/main.yml
+    - include: tasks/shell.yml
+    - include: tasks/database.yml
+    - include: tasks/php.yml
+    - include: tasks/apache.yml
