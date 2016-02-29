@@ -1,0 +1,31 @@
+--- #development config vars
+
+#Default values for development
+
+environment: development
+administrator_email: vagrant@localhost
+application_directory: /Projects/devclass
+eportfolio_directory: /Projects/epfdata
+templates_directory: /Projects/devclass/templates
+classis_directory: classis
+database_backup_directory: /tmp
+logs_directory: /Projects/epfdata
+utils_directory: /Porjects/utils
+http_port: 80
+https_port: 443
+apache_site: 000-default.conf
+apache_error_log_path: ${APACHE_LOG_DIR}
+apache_access_log_path: ${APACHE_LOG_DIR}
+certificate_file_path: /Projects/certificates/test.crt
+certificate_key_file_path: /Projects/certificates/test.key
+slave_server_ip: 0.0.0.0
+master_server_ip: 127.0.01
+host: 127.0.0.1
+user: vagrant
+db_name: classis
+db_user: root
+db_pass: 
+school_name: Classis for Development
+password_short_keyword: guest
+application_url: localhost:8080
+
