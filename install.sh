@@ -71,5 +71,5 @@ else
 	exit 1
 fi
 
-echo "Configure Classis school.php file:"
-nano $application_directory/school.php
+#echo "Configure Classis school.php file:"
+#nano $application_directory/school.php
