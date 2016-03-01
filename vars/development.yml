@@ -30,5 +30,6 @@ db_pass:
 db_port: 3306
 school_name: Classis for Development
 password_short_keyword: guest
+classis_administrator_password: administrator
 application_url: localhost:8080
 repository: git@github.com:LearningData/classis.git

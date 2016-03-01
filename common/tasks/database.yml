@@ -1,0 +1,3 @@
+# MYSQL
+- name: Install MySQL
+  action: apt name=mysql-server

@@ -32,6 +32,9 @@
 - name: Copy default eportfolio directory
   synchronize: dest={{ eportfolio_directory }} src=common/files/classis/eportfolio/ recursive=yes
 
+- name: Copy wkhtmltopdf working version to /usr/local/bin
+  copy: dest=/usr/local/bin src=common/files/classis/utils/wkhtmltopdf mode=0775
+
 - name: Create utils directory
   file: dest={{ utils_directory }} state=directory follow=yes
 

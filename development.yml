@@ -5,6 +5,7 @@
     - include_vars: vars/development.yml
     - include: common/tasks/main.yml
     - include: common/tasks/shell.yml
+    - include: common/tasks/database.yml
     - include: development/tasks/database.yml
     - include: common/tasks/php.yml
     - include: common/tasks/pear.yml
