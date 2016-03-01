@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#sudo apt-get install -y ansible
+sudo apt-get install ansible
 
 echo "Environment: production or development?"
 read env
@@ -60,10 +60,10 @@ if  [ "$env" == "production" ]; then
 elif  [ "$env" == "development" ]; then
 	echo "Installing VirtualBox, Vagrant and Capistrano for development."
 
-	#sudo apt-get install -y virtualbox vagrant capistrano git
+	sudo apt-get install virtualbox vagrant capistrano git
 
 	echo "Initiating the vagrant box with ansible provision."
-	vagrant up
+	vagrant up --provision
 
 	application_directory="."
 else
