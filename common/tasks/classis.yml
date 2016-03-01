@@ -32,6 +32,12 @@
 - name: Copy default eportfolio directory
   synchronize: dest={{ eportfolio_directory }} src=common/files/classis/eportfolio/ recursive=yes
 
+- name: Change permissions eportfolio directory
+  file: path={{ eportfolio_directory }} group=www-data mode=0775 recurse=yes
+
+- name: Change permissions classis directory
+  file: path={{ application_directory }}/{{ classis_directory }} group=www-data mode=0755 recurse=yes
+
 - name: Copy wkhtmltopdf working version to /usr/local/bin
   copy: dest=/usr/local/bin src=common/files/classis/utils/wkhtmltopdf mode=0775
 

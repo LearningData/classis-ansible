@@ -7,7 +7,9 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 3306, host: 3306
 
-  config.vm.synced_folder "~/Projects/classis", "/Projects", create: true
+  config.vm.synced_folder "~/Projects/classis", "/Projects", create: true,
+	:owner => "www-data",
+	:group => "vagrant"
   config.ssh.forward_agent = true
 
   config.vm.provision "ansible" do |ansible|

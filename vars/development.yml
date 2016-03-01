@@ -4,14 +4,15 @@
 
 environ: development
 administrator_email: vagrant@localhost
-devclass_directory: devclassis
-application_directory: /Projects/devclassis
-eportfolio_directory: /Projects/epfdata
-templates_directory: /Projects/devclass/templates
+toplevel_directory: devclassis
+synchronised_directory: /Projects
+application_directory: "{{ synchronised_directory }}/{{ toplevel_directory }}"
+eportfolio_directory: "{{ synchronised_directory }}/epfdata"
+templates_directory: "{{ application_directory }}/templates"
 classis_directory: classis
 database_backup_directory: /tmp
-logs_directory: /Projects/epfdata
-utils_directory: /Projects/utils
+logs_directory: "{{ synchronised_directory }}/epfdata"
+utils_directory: "{{ synchronised_directory }}/utils"
 http_port: 80
 https_port: 443
 apache_site: 000-default.conf

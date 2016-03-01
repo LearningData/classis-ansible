@@ -19,7 +19,7 @@ $CFG->sitename='Classis for {{ school_name }}';
 /*the web-site's real domain name*/
 $CFG->siteaddress='{{ application_url }}';
 /*the web-site's url path*/
-$CFG->sitepath='/';
+$CFG->sitepath='/{{ toplevel_directory }}';
 /*flag 'up' or 'down' to prevent any user logins*/
 $CFG->sitestatus='up';
 /*the path to the top-level site directory*/
@@ -243,6 +243,7 @@ $CFG->calendarsrc='';
 $CFG->statementbank_db='';
 /*optional details for publishing reports to pdf using html2ps*/
 $CFG->html2psscript='';
+$CFG->wkhtml2pdf='/usr/local/bin/wkhtmltopdf';
 /**
  *
  * API Key for web services
