@@ -18,8 +18,8 @@ http_port: 80
 apache_site: 000-default.conf
 apache_error_log_path: ${APACHE_LOG_DIR}
 apache_access_log_path: ${APACHE_LOG_DIR}
-certificate_file_path: {{ base_directory }}/certificates/test.crt
-certificate_key_file_path: {{ base_directory }}/certificates/test.key
+certificate_file_path: "{{ base_directory }}/certificates/test.crt"
+certificate_key_file_path: "{{ base_directory }}/certificates/test.key"
 host: 127.0.0.1
 port: 22
 user: vagrant
