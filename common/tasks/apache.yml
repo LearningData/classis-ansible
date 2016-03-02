@@ -17,6 +17,7 @@
 
 - name: Enable ssl
   command: a2enmod ssl
+  when: ssl == 'on'
 
 - name: Enable site
   command: a2ensite {{ apache_site }}
