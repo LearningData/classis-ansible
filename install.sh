@@ -23,7 +23,7 @@ if  [ "$env" == "production" ]; then
 	echo "School Name?"
 	read school_name
 
-	config="vars/production.yml"
+	config="./vars/production.yml"
 
 	echo "Creating the production vars file for Ansible templates..."
 
@@ -55,8 +55,12 @@ if  [ "$env" == "production" ]; then
 	echo "password_short_keyword: $pass_short_keyword" >> "$config"
 	echo "application_url: $application_url" >> "$config"
 
+	hosts="./hosts"
+	echo "[school]" > "$hosts"
+	echo "$host ansible_port=$port ansible_user=$user" >> "$hosts"
+
 	echo "Initiating Classis installation with ansible provision."
-	ansible-playbook production.yml -f 10
+	ansible-playbook -i hosts production.yml -f 10 --ask-sudo-pass
 elif  [ "$env" == "development" ]; then
 	echo "Installing VirtualBox, Vagrant and Capistrano for development."
 
@@ -64,12 +68,7 @@ elif  [ "$env" == "development" ]; then
 
 	echo "Initiating the vagrant box with ansible provision."
 	vagrant up --provision
-
-	application_directory="."
 else
 	echo "Cannot continue without selecting an environment."
 	exit 1
 fi
-
-#echo "Configure Classis school.php file:"
-#nano $application_directory/school.php
