@@ -1,12 +1,20 @@
 # MYSQL
 - name: Copy my.cnf file
-  copy: dest=/etc/mysql/ src=production/files/database/my.cnf.master
+  template: dest=/etc/mysql/my.cnf src=production/files/database/my.cnf-master
 
-- name: Root permissions
-  command: mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;"
+- name: Db root permissions
+  command: mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '{{ db_user }}'@'%' WITH GRANT OPTION;"
 
-- name: Create classis
-  command: mysql -u root -e "CREATE DATABASE IF NOT EXISTS classis;"
+- name: Create classis db
+  command: mysql -u {{ db_user }} -e "CREATE DATABASE IF NOT EXISTS {{ db_name }} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
 
-- name: Restart mysql
-  command: service mysql restart
+- name: Copy empty_database.sql to /tmp
+  copy: dest=/tmp src=common/files/classis/database.sql
+
+- name: Import empty database
+  shell: mysql -u {{ db_user }} {{ db_name }} < /tmp/database.sql
+
+- name: Create classis administrator user
+  command: mysql -u {{ db_user }} {{ db_name }} -e "UPDATE users SET md5('{{ classis_administrator_password }}'), 'administrator', 'admin', 'admin' FROM users
+
+- service: name=mysql state=restarted

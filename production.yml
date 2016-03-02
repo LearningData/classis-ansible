@@ -10,4 +10,4 @@
     - include: common/tasks/pear.yml
     - include: common/tasks/apache.yml
     - include: common/tasks/classis.yml
-    - include: production/tasks/classis.yml
+    - include: production/tasks/cron.yml

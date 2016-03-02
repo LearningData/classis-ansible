@@ -1,3 +1,0 @@
-- name: additional tasks
-  file: path={{ eportfolio_directory }} state=directory
-

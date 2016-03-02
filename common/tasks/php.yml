@@ -30,3 +30,6 @@
 
 - name: copy phpmyadmin config.inc.php file
   template: dest=/etc/phpmyadmin/config.inc.php src=common/files/phpmyadmin/config.inc.php
+
+- name: copy php.ini
+  template: dest=/etc/php5/apache2/php.ini src=common/files/php/php.ini
