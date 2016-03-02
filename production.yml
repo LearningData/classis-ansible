@@ -2,3 +2,12 @@
   become: yes
   tasks:
     - include_vars: vars/production.yml
+    - include: common/tasks/main.yml
+    - include: common/tasks/shell.yml
+    - include: common/tasks/database.yml
+    - include: production/tasks/database.yml
+    - include: common/tasks/php.yml
+    - include: common/tasks/pear.yml
+    - include: common/tasks/apache.yml
+    - include: common/tasks/classis.yml
+    - include: production/tasks/classis.yml
