@@ -1,0 +1,10 @@
+- name: Copy monitoring scripts
+  template: dest={{ utils_directory }}/monitoring/ src=common/classis/utils/monitoring/{{ item }}
+  with_items:
+    - apache_monitor
+    - disk_space_monitor
+
+- name: Add monitoring cron jobs
+  template: dest=/etc/cron.d/classis_monitoring src=common/classis/utils/monitoring/monitor_cron
+
+- service: name=cron state=restarted

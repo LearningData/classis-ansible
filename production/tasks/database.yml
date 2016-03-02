@@ -15,6 +15,6 @@
   shell: mysql -u {{ db_user }} {{ db_name }} < /tmp/database.sql
 
 - name: Create classis administrator user
-  command: mysql -u {{ db_user }} {{ db_name }} -e "UPDATE users SET md5('{{ classis_administrator_password }}'), 'administrator', 'admin', 'admin' FROM users
+  command: mysql -u {{ db_user }} {{ db_name }} -e "UPDATE users SET passwd=md5('{{ classis_administrator_password }}') WHERE username='administrator';"
 
 - service: name=mysql state=restarted

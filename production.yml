@@ -11,3 +11,4 @@
     - include: common/tasks/apache.yml
     - include: common/tasks/classis.yml
     - include: production/tasks/cron.yml
+    - include: production/tasks/monitoring.yml
