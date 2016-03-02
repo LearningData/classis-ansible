@@ -5,31 +5,31 @@
 environ: development
 administrator_email: vagrant@localhost
 toplevel_directory: devclassis
-synchronised_directory: /Projects
-application_directory: "{{ synchronised_directory }}/{{ toplevel_directory }}"
-eportfolio_directory: "{{ synchronised_directory }}/epfdata"
+base_directory: /Projects
+application_directory: "{{ base_directory }}/{{ toplevel_directory }}"
+eportfolio_directory: "{{ base_directory }}/epfdata"
 templates_directory: "{{ application_directory }}/templates"
 classis_directory: classis
 database_backup_directory: /tmp
-logs_directory: "{{ synchronised_directory }}/epfdata"
-utils_directory: "{{ synchronised_directory }}/utils"
+logs_directory: "{{ base_directory }}/epfdata"
+utils_directory: "{{ base_directory }}/utils"
+ssl: off
 http_port: 80
-https_port: 443
 apache_site: 000-default.conf
 apache_error_log_path: ${APACHE_LOG_DIR}
 apache_access_log_path: ${APACHE_LOG_DIR}
-certificate_file_path: /Projects/certificates/test.crt
-certificate_key_file_path: /Projects/certificates/test.key
-slave_server_ip: 0.0.0.0
-master_server_ip: 127.0.01
+certificate_file_path: {{ base_directory }}/certificates/test.crt
+certificate_key_file_path: {{ base_directory }}/certificates/test.key
 host: 127.0.0.1
+port: 22
 user: vagrant
 db_host: 127.0.0.1
+db_port: 3306
 db_name: classis
 db_user: root
 db_pass: 
-db_port: 3306
 school_name: Classis for Development
+school_logo_path: 
 password_short_keyword: guest
 classis_administrator_password: administrator
 application_url: localhost:8080
