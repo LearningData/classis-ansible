@@ -29,7 +29,7 @@
     - XML_Serializer-0.20.0
     - XML_Util-1.2.3
 
-- name: Update htmlpurifier channel.
+- name: update htmlpurifier channel.
   command: pear channel-discover htmlpurifier.org
   register: channel_result
   changed_when: "'already initialized' not in channel_result.stdout"

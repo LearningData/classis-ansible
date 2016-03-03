@@ -1,10 +1,10 @@
-- name: Add Classis cron jobs
+- name: add Classis cron jobs
   template: dest=/etc/cron.d/classis src=common/files/classis/utils/cron/classis_cron
 
-- name: Set DB_PASS as environment variable
+- name: set DB_PASS as environment variable
   lineinfile: "dest=/etc/environment state=present regexp='^DB_PASS\=' line='DB_PASS={{ db_pass }}'"
 
-- name: Copy dumps scripts
+- name: copy dumps scripts
   template: dest={{ database_dumps_directory }} src=common/files/classis/utils/cron/{{ item }}
   with_items:
     - daily
@@ -13,7 +13,8 @@
     - weekly-mv
     - class.conf
 
-- name: Set db dumps cron jobs
+- name: set db dumps cron jobs
   template: dest=/var/spool/cron/crontabs/{{ user }} src=common/files/classis/utils/cron/dumps_crontab
 
-- service: name=cron state=restarted
+- name: restart cron
+  service: name=cron state=restarted

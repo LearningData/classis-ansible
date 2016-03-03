@@ -1,13 +1,14 @@
-- name: Add apache monitoring html file
+- name: add apache monitoring html file
   template: dest={{ application_directory }}/monitor.html src=common/files/classis/monitor.html
 
-- name: Copy monitoring scripts
+- name: copy monitoring scripts
   template: dest={{ utils_directory }}/monitoring/ src=common/files/classis/utils/monitoring/{{ item }}
   with_items:
     - apache_monitor
     - disk_space_monitor
 
-- name: Add monitoring cron jobs
+- name: add monitoring cron jobs
   template: dest=/etc/cron.d/classis_monitoring src=common/files/classis/utils/monitoring/monitor_cron
 
-- service: name=cron state=restarted
+- name: restart cron
+  service: name=cron state=restarted

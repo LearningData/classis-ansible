@@ -12,15 +12,16 @@
 - name: copy phpmyadmin config file
   template: dest=/etc/apache2/conf-enabled/phpmyadmin.conf src=common/files/phpmyadmin/phpmyadmin.conf
 
-- name: Enable rewrite
+- name: enable rewrite
   command: a2enmod rewrite
 
-- name: Enable ssl
+- name: enable ssl
   command: a2enmod ssl
   when: ssl == 'on'
 
-- name: Enable site
+- name: enable site
   command: a2ensite {{ apache_site }}
 
-- service: name=apache2 state=restarted
+- name: restart apache
+  service: name=apache2 state=restarted
 

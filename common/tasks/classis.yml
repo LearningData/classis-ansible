@@ -1,55 +1,55 @@
-- name: Create application directory
+- name: create application directory
   file: dest={{ application_directory }} state=directory follow=yes
 
-- name: Setup the Classis git repo
+- name: setup the Classis git repo
   become: no
   git: repo={{ repository  }} dest={{ application_directory }}/{{ classis_directory }} accept_hostkey=yes update=no
 
-- name: Copy toplevel images
+- name: copy toplevel images
   command: cp -pr {{ application_directory }}/{{ classis_directory }}/install/toplevel/images {{ application_directory }}/ creates={{ application_directory }}/images
 
-- name: Copy toplevel templates
+- name: copy toplevel templates
   command: cp -pr {{ application_directory }}/{{ classis_directory }}/install/toplevel/templates {{ application_directory }}/ creates={{ application_directory }}/templates
 
-- name: Copy toplevel curriculum
+- name: copy toplevel curriculum
   command: cp -pr {{ application_directory }}/{{ classis_directory }}/install/toplevel/curriculum {{ application_directory }}/ creates={{ application_directory }}/curriculum
 
-- name: Copy toplevel schoollang
+- name: copy toplevel schoollang
   command: cp -p {{ application_directory }}/{{ classis_directory }}/install/toplevel/schoollang.php {{ application_directory }}/
 
-- name: Copy toplevel schoolarrays
+- name: copy toplevel schoolarrays
   command: cp -p {{ application_directory }}/{{ classis_directory }}/install/toplevel/schoolarrays.php {{ application_directory }}/
 
-- name: Copy toplevel index
+- name: copy toplevel index
   command: cp -p {{ application_directory }}/{{ classis_directory }}/install/toplevel/index.php {{ application_directory }}/
 
-- name: Create db_connect
+- name: create db_connect
   template: dest={{ application_directory }}/dbh_connect.php src=common/files/classis/config/dbh_connect.php
 
-- name: Create school.php
+- name: create school.php
   template: dest={{ application_directory }}/school.php src=common/files/classis/config/school.php
 
-- name: Copy default eportfolio directory
+- name: copy default eportfolio directory
   synchronize: dest={{ eportfolio_directory }} src=common/files/classis/eportfolio/ recursive=yes
 
-- name: Change permissions eportfolio directory
+- name: change permissions eportfolio directory
   file: path={{ eportfolio_directory }} group=www-data mode=0775 recurse=yes
 
-- name: Change permissions classis directory
+- name: change permissions classis directory
   file: path={{ application_directory }}/{{ classis_directory }} group=www-data mode=0755 recurse=yes
 
-- name: Copy wkhtmltopdf working version to /usr/local/bin
+- name: copy wkhtmltopdf working version to /usr/local/bin
   copy: dest=/usr/local/bin src=common/files/classis/utils/wkhtmltopdf mode=0775
 
-- name: Create utils directory
+- name: create utils directory
   file: dest={{ utils_directory }} state=directory follow=yes
 
-- name: Copy default utils mandrill directory
+- name: copy default utils mandrill directory
   synchronize: dest={{ utils_directory }}/ src=common/files/classis/utils/mandrill recursive=yes
 
-- name: Copy default utils esendex directory
+- name: copy default utils esendex directory
   synchronize: dest={{ utils_directory }}/ src=common/files/classis/utils/esendex-php-sdk recursive=yes
 
-- name: Link School logo
+- name: link School logo
   shell: ln -sf {{ school_logo_path }} {{ application_directory }}/images/schoollogo.png
   when: school_logo_path != ''

@@ -1,28 +1,28 @@
 - name: apt-get update
   apt: update_cache=yes
 
-- name: add php5-dev
+- name: install php5-dev
   apt: name=php5 state=present
 
-- name: add libapache2-mod-php5
+- name: install libapache2-mod-php5
   apt: name=libapache2-mod-php5 state=present
 
-- name: add php5-xsl
+- name: install php5-xsl
   apt: name=php5-xsl state=present
 
-- name: add php5-mysql
+- name: install php5-mysql
   apt: name=php5-mysql state=present
 
-- name: apt-get install php5-mcrypt
+- name: install php5-mcrypt
   apt: name=php5-mcrypt state=present
 
-- name: apt-get install php5-curl
+- name: install php5-curl
   apt: name=php5-curl state=present
 
-- name: Enable php5-mcrypt
+- name: enable php5-mcrypt
   command: php5enmod mcrypt
 
-- name: apt-get install phpmyadmin
+- name: install phpmyadmin
   apt: name=phpmyadmin state=present
 
 - name: copy phpmyadmin config-db file
