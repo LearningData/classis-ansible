@@ -1,11 +1,19 @@
 #!/bin/bash
 
+echo ""
+echo "Installing Ansible..."
+echo ""
 sudo apt-get install ansible
 
+echo ""
+echo "***********************************************"
 echo "Make sure you have a machine with Ubuntu 12.04 or Ubuntu 14.04, you have the host/ip of the server, the user for the server is a sudoer and you have the password. Recommended to add your public ssh key to /home/user/.ssh/authorized_keys"
 echo "If you choose to activate SSL on the server, option which we recommend, please make sure you upload the certificates to the server. You can also upload a logo to the server."
 echo "Please complete the next questionnaire to install a Classis instance on your server."
 echo "Press Enter to skip and leave the default value in the configuration. Otherwise type the answer and press Enter."
+echo "***********************************************"
+echo ""
+
 echo "Environment: production or development?"
 read env
 
@@ -160,19 +168,30 @@ if  [ "$env" == "production" ]; then
 	echo "Initiating Classis installation with ansible provision."
 	ansible-playbook -i hosts production.yml -f 10 --ask-sudo-pass
 
-	echo "\n********************************************************"
-	echo " "
+	echo ""
+	echo "********************************************************"
+	echo ""
 	echo "     You can access Classis at $http://$application_url/$application_directory      "
-	echo " "
+	echo ""
 	echo "********************************************************"
 elif  [ "$env" == "development" ]; then
+	echo ""
+	echo "********************************************************"
 	echo "Installing VirtualBox, Vagrant and Capistrano for development."
+	echo "********************************************************"
+	echo ""
 
 	sudo apt-get install virtualbox vagrant capistrano git
 
+	echo ""
+	echo "********************************************************"
 	echo "Initiating the vagrant box with ansible provision."
+	echo "********************************************************"
+	echo ""
 	vagrant up --provision
 else
+	echo ""
 	echo "Cannot continue without selecting an environment."
+	echo ""
 	exit 1
 fi
