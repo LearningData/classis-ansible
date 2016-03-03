@@ -1,21 +1,21 @@
 # MAIN DEPENDENCIES
 - name: apt-get update
-  action: apt update_cache=yes
+  apt: update_cache=yes
 
 - name: add build-essential
-  action: apt name=build-essential
+  apt: name=build-essential state=present
 
 - name: add git-core
-  action: apt name=git-core
+  apt: name=git-core state=present
 
 - name: add openssl
-  action: apt name=openssl
+  apt: name=openssl state=present
 
 - name: add libssl-dev
-  action: apt name=libssl-dev
+  apt: name=libssl-dev state=present
 
 - name: add libcurl3
-  action: apt name=libcurl3
+  apt: name=libcurl3 state=present
 
 - name: add libxrender1
-  action: apt name=libxrender1
+  apt: name=libxrender1 state=present

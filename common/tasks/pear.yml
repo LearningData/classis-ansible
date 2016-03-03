@@ -1,28 +1,33 @@
 - name: install pear
-  action: apt name=php-pear
+  apt: name=php-pear state=present
 
-- pear: name=PEAR state=latest
-- pear: name=Archive_Tar-1.3.16
-- pear: name=Auth_SASL-1.0.6
-- pear: name=Console_Getopt-1.3.1
-- pear: name=DB-1.9.2
-- pear: name=HTTP-1.4.1
-- pear: name=HTTP_Request2-2.2.1
-- pear: name=MDB2-2.4.1
-- pear: name=Mail-1.2.0
-- pear: name=Mail_Mime-1.8.9
-- pear: name=Mail_Queue-1.2.7
-- pear: name=Mail_mimeDecode-1.5.5
-- pear: name=Math_Combinatorics-1.0.0
-- pear: name=Net_SMTP-1.6.2
-- pear: name=Net_Socket-1.0.14
-- pear: name=Net_URL2-2.2.0
-- pear: name=OLE-1.0.0RC1
-- pear: name=Spreadsheet_Excel_Writer-0.9.2
-- pear: name=Structures_Graph-1.0.4
-- pear: name=XML_Parser-1.3.2
-- pear: name=XML_Serializer-0.20.0
-- pear: name=XML_Util-1.2.3
+- name: install latest PEAR/PEAR package
+  pear: name=PEAR state=latest
+
+- name: install pear packages
+  pear: name={{ item }}
+  with_items:
+    - Archive_Tar-1.3.16
+    - Auth_SASL-1.0.6
+    - Console_Getopt-1.3.1
+    - DB-1.9.2
+    - HTTP-1.4.1
+    - HTTP_Request2-2.2.1
+    - MDB2-2.4.1
+    - Mail-1.2.0
+    - Mail_Mime-1.8.9
+    - Mail_Queue-1.2.7
+    - Mail_mimeDecode-1.5.5
+    - Math_Combinatorics-1.0.0
+    - Net_SMTP-1.6.2
+    - Net_Socket-1.0.14
+    - Net_URL2-2.2.0
+    - OLE-1.0.0RC1
+    - Spreadsheet_Excel_Writer-0.9.2
+    - Structures_Graph-1.0.4
+    - XML_Parser-1.3.2
+    - XML_Serializer-0.20.0
+    - XML_Util-1.2.3
 
 - name: Update htmlpurifier channel.
   command: pear channel-discover htmlpurifier.org
@@ -30,4 +35,5 @@
   changed_when: "'already initialized' not in channel_result.stdout"
   failed_when: "channel_result.stderr"
 
-- pear: name=hp/HTMLPurifier
+- name: install HTMLPurifier PEAR package
+  pear: name=hp/HTMLPurifier

@@ -1,10 +1,10 @@
 # APACHE
 # ====================================================
 - name: install apache2
-  action: apt name=apache2
+  apt: name=apache2 state=present
 
 - name: install libapache2-mod-php5
-  action: apt name=libapache2-mod-php5
+  apt: name=libapache2-mod-php5 state=present
 
 - name: copy apache config file
   template: dest=/etc/apache2/sites-available/{{ apache_site }} src={{ environ }}/files/apache/{{ apache_site }}
