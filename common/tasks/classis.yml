@@ -32,12 +32,6 @@
 - name: copy default eportfolio directory
   synchronize: dest={{ eportfolio_directory }} src=common/files/classis/eportfolio/ recursive=yes
 
-- name: change permissions eportfolio directory
-  file: path={{ eportfolio_directory }} group=www-data mode=0775 recurse=yes
-
-- name: change permissions classis directory
-  file: path={{ application_directory }}/{{ classis_directory }} group=www-data mode=0755 recurse=yes
-
 - name: copy wkhtmltopdf working version to /usr/local/bin
   copy: dest=/usr/local/bin src=common/files/classis/utils/wkhtmltopdf mode=0775
 
@@ -53,3 +47,12 @@
 - name: link School logo
   shell: ln -sf {{ school_logo_path }} {{ application_directory }}/images/schoollogo.png
   when: school_logo_path != ''
+
+- name: set Classis directory permisssions
+  file: path={{ application_directory }} state=directory owner={{ user }} group=www-data mode=0750 recurse=yes
+
+- name: set eportfolio directory permisssions
+  file: path={{ eportfolio_directory }} state=directory owner=www-data group={{ user }} mode=0775 recurse=yes
+
+- name: set utils directory permisssions
+  file: path={{ utils_directory }} state=directory owner={{ user }} group=www-data mode=0750 recurse=yes
