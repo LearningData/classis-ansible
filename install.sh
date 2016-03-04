@@ -158,7 +158,7 @@ if  [ "$env" == "production" ]; then
 	echo "school_logo_path: $school_logo_path" >> "$config"
 	echo "password_short_keyword: $password_short_keyword" >> "$config"
 	echo "classis_administrator_password: $admin_password" >> "$config"
-	echo "repository: git@github.com:LearningData/classis.git" >> "$config"
+	echo "repository: https://github.com/LearningData/classis.git" >> "$config"
 
 
 	hosts="./hosts"
