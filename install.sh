@@ -90,7 +90,7 @@ if  [ "$env" == "production" ]; then
 	echo "School Name?"
 	read school_name
 
-	echo "Please type the full path to the School log: (Example: /home/$user/myschoollogo.png)"
+	echo "Please type the full path to the School logo: (Example: /home/$user/myschoollogo.png)"
 	read school_logo_path
 
 	echo "Classis administrator password? *Password to login with administrator user into Classis"
@@ -166,7 +166,7 @@ if  [ "$env" == "production" ]; then
 	echo "$host ansible_port=$port ansible_user=$user" >> "$hosts"
 
 	echo "Initiating Classis installation with ansible provision."
-	ansible-playbook -i hosts production.yml -f 10 --ask-sudo-pass
+	ansible-playbook -i hosts production.yml -f 10 --ask-pass
 
 	echo ""
 	echo "********************************************************"
