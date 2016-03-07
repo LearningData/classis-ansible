@@ -1,5 +1,5 @@
 - name: create application directory
-  file: dest={{ application_directory }} state=directory follow=yes
+  file: dest={{ application_directory }} state=directory follow=yes owner={{ user }} group=www-data mode=0750
 
 - name: setup the Classis git repo
   become: no
@@ -37,6 +37,9 @@
 
 - name: create utils directory
   file: dest={{ utils_directory }} state=directory follow=yes
+
+- name: create backups directory
+  file: dest={{ database_backup_directory }} state=directory follow=yes
 
 - name: copy default utils mandrill directory
   synchronize: dest={{ utils_directory }}/ src=common/files/classis/utils/mandrill recursive=yes

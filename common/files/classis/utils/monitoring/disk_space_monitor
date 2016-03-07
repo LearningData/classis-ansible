@@ -1,6 +1,5 @@
 #!/bin/bash
 email={{ administrator_email }}
-#ccemail={{ secondary_administrator_email }}
 threshold=84
 
 CURRENT=$(df / | grep / | awk '{ print $5}' | sed 's/%//g')

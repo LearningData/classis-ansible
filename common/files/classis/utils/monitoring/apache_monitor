@@ -1,6 +1,5 @@
 #!/bin/bash
 email={{ administrator_email }}
-#ccemail={{ secondary_administrator_email }}
 url={{ application_url }}/monitor.html
 
 if curl -s --head $url --insecure | grep "200 OK" > /dev/null

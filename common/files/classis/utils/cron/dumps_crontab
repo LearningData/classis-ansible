@@ -1,6 +1,6 @@
 # m h  dom mon dow   command
 # MAILTO={{ administrator_email }}
-10 22 * * * {{ database_dumps_directory }}/daily
-15 22 * * * {{ database_dumps_directory }}/daily-mv
-31 23 * * 7 {{ database_dumps_directory }}/weekly
-46 23 * * 7 {{ database_dumps_directory }}/weekly-mv
+10 22 * * * {{ database_backup_directory }}/daily
+15 22 * * * {{ database_backup_directory }}/daily-mv
+31 23 * * 7 {{ database_backup_directory }}/weekly
+46 23 * * 7 {{ database_backup_directory }}/weekly-mv

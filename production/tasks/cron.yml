@@ -2,10 +2,10 @@
   template: dest=/etc/cron.d/classis src=common/files/classis/utils/cron/classis_cron
 
 - name: set DB_PASS as environment variable
-  lineinfile: "dest=/etc/environment state=present regexp='^DB_PASS\=' line='DB_PASS={{ db_pass }}'"
+  lineinfile: dest=/etc/environment state=present regexp='^DB_PASS\=' line='DB_PASS={{ db_pass }}'
 
 - name: copy dumps scripts
-  template: dest={{ database_dumps_directory }} src=common/files/classis/utils/cron/{{ item }}
+  template: dest={{ database_backup_directory }} src=common/files/classis/utils/cron/{{ item }}
   with_items:
     - daily
     - daily-mv

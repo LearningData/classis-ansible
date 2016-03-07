@@ -1,6 +1,6 @@
 #! /bin/sh
 TODAY="`date +%Y%m%d`"
-FILEPATH="{{ database_dumps_directory }}"
+FILEPATH="{{ database_backup_directory }}"
 CONFILE="class.conf"
 
 cd $FILEPATH
