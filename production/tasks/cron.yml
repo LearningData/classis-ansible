@@ -7,9 +7,6 @@
 - name: set DB_PASS as environment variable
   lineinfile: dest=/etc/environment state=present regexp='^DB_PASS\=' line='DB_PASS={{ db_pass }}'
 
-- name: source /etc/environment
-  shell: source /etc/environment
-
 - name: copy dumps scripts
   template: dest={{ database_backup_directory }} src=common/files/classis/utils/cron/{{ item }}
   with_items:
