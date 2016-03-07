@@ -1,6 +1,14 @@
 - name: create application directory
   file: dest={{ application_directory }} state=directory follow=yes owner={{ user }} group=www-data mode=0750 recurse=yes
 
+- name: ensure github.com is a known host
+  lineinfile:
+    dest: /home/{{ user }}/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
+
 - name: setup the Classis git repo
   become: no
   git: repo={{ repository  }} dest={{ application_directory }}/{{ classis_directory }} accept_hostkey=yes update=no
