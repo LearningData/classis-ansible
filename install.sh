@@ -99,7 +99,7 @@ if  [ "$env" == "production" ]; then
 	echo "Classis short keyword string for password? *Password is created with this string and then added 4 digits as PIN"
 	read password_short_keyword
 
-	default_base_directory="/var/www/html"
+	default_base_directory="/home/htdocs"
 	echo "Directory where Classis will be installed? Default: $default_base_directory"
 	read base_directory
 	base_directory=${base_directory:-$default_base_directory}

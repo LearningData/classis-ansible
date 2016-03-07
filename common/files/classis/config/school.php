@@ -208,8 +208,8 @@ $CFG->fees_mandate_type='student_id';
  *
  * Optional LDAP connection details.
  */
-$CFG->ldapdc1='example';
-$CFG->ldapdc2='com';
+$CFG->ldapdc1='';
+$CFG->ldapdc2='';
 $CFG->ldapserver='';
 $CFG->ldapuser='';
 $CFG->ldappasswd='';
@@ -230,14 +230,14 @@ $CFG->eportfolio_db_prefix='';
 $CFG->eportfolio_access='enrol';
 /*optional details of the school's lms site*/
 $CFG->lmssite='';
-$CFG->lmstabname='Moodle';
-$CFG->lmsshare='secret';
+$CFG->lmstabname='';
+$CFG->lmsshare='';
 $CFG->lms_db='';
 /* Optional details of the school's calendar site - currently only
  * work with a public google calendar. 
  */
-$CFG->calendarsite='https://www.google.com/calendar';
-$CFG->calendartabname='Calendar';
+$CFG->calendarsite='';
+$CFG->calendartabname='';
 $CFG->calendarsrc='';
 /*optional details of the statement bank for writing report comments*/
 $CFG->statementbank_db='';

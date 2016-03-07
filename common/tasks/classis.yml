@@ -1,5 +1,5 @@
 - name: create application directory
-  file: dest={{ application_directory }} state=directory follow=yes owner={{ user }} group=www-data mode=0750
+  file: dest={{ application_directory }} state=directory follow=yes owner={{ user }} group=www-data mode=0750 recurse=yes
 
 - name: setup the Classis git repo
   become: no
