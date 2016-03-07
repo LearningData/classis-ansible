@@ -1,8 +1,14 @@
+- name: create backups directory
+  file: dest={{ database_backup_directory }} state=directory follow=yes group={{ user }}
+
 - name: add Classis cron jobs
   template: dest=/etc/cron.d/classis src=common/files/classis/utils/cron/classis_cron
 
 - name: set DB_PASS as environment variable
   lineinfile: dest=/etc/environment state=present regexp='^DB_PASS\=' line='DB_PASS={{ db_pass }}'
+
+- name: source /etc/environment
+  shell: source /etc/environment
 
 - name: copy dumps scripts
   template: dest={{ database_backup_directory }} src=common/files/classis/utils/cron/{{ item }}
@@ -15,6 +21,9 @@
 
 - name: set db dumps cron jobs
   template: dest=/var/spool/cron/crontabs/{{ user }} src=common/files/classis/utils/cron/dumps_crontab
+
+- name: set backup directory permisssions
+  file: path={{ database_backup_directory }} state=directory group={{ user }} mode=0770 recurse=yes
 
 - name: restart cron
   service: name=cron state=restarted

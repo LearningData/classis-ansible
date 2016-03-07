@@ -8,7 +8,7 @@ cd $FILEPATH
 exec 3<$CONFILE
 while read dbn <&3
  do
-        /usr/bin/mysqldump --ignore-table $dbn.message_event --password$DB_PASS -u {{ db_user }} $dbn > weekly$dbn.sql
+        /usr/bin/mysqldump --ignore-table $dbn.message_event --password={{ db_pass }} -u {{ db_user }} $dbn > weekly$dbn.sql
  done
 
 exec 3>&-

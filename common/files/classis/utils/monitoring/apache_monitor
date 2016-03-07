@@ -1,6 +1,6 @@
 #!/bin/bash
 email={{ administrator_email }}
-url={{ application_url }}/monitor.html
+url={{ application_url }}/{{ toplevel_directory }}/monitor.html
 
 if curl -s --head $url --insecure | grep "200 OK" > /dev/null
   then 
