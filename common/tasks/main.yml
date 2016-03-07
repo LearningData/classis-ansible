@@ -19,3 +19,6 @@
 
 - name: add libxrender1
   apt: name=libxrender1 state=present
+
+- name: add mailutils
+  apt: name=mailutils state=present
