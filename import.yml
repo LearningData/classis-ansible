@@ -1,0 +1,30 @@
+- hosts: school
+  become: yes
+  tasks:
+    - include_vars: vars/production.yml
+
+    - name: copy tarball to tmp
+      copy: dest=/tmp/ src={{ path_to_classis_tarball }}
+      register: file
+
+    - name: extract tarball content
+      shell: tar -xzvf file.dest
+
+    - name: replace eportfolio directory
+      shell: mv /tmp/eportfolio {{ eportfolio_directory }}
+
+    - name: replace database
+      shell: mysql -p{{ db_pass }} -u {{ db_user }} {{ db_name }} < /tmp/classis.sql
+
+    - name: add school templates
+      shell: mv /tmp/templates/* {{ templates_directory }}/
+
+    - name: move images
+      shell: mv /tmp/images/* {{ application_directory }}/images
+
+    - name: replace school config files
+      shell: mv /tmp/config/{{item}} {{ application_directory }}
+      with_items:
+        - school.php
+        - schoolarrays.php
+        - schoollang.php
