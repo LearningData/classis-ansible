@@ -56,7 +56,7 @@ if  [ "$env" == "production" ]; then
 	fi
 
 	default_ssl="off"
-	echo "Turn on SSL? Default: $default_ssl, type 'on' to turn on SSL."
+	echo "Turn on SSL? Default: $default_ssl, type 'on' to turn on SSL (recommended)."
 	read ssl
 	ssl=${ssl:-$default_ssl}
 
