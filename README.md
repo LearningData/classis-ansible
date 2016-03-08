@@ -10,6 +10,8 @@ Development contains all the default data to be used with Vagrant like configura
 
 Production contains all config files and task specific to a primary-secondary production server like apache ssl config, mysql master/slave config, php.ini config, cron jobs and database dumps setup.
 
+If you have a classis_data.tar.gz file you can import it by running ./import.sh and then type the full path to this file, it will completely overwrite any database, templates, eportfolio data on the remote server.
+
 ## Development
 
 Installs VirtualBox, Vagrant and Capistrano. Clones the master from Github on local. Default db user is root with no password and port for Apache is 8080. It can be accessed at localhost:8080/devclass/class.
