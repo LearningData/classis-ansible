@@ -7,24 +7,51 @@
       copy: dest=/tmp/ src={{ path_to_classis_tarball }}
       register: file
 
+    - name: create classis import dir
+      file: dest=/tmp/classis_data state=directory
+
     - name: extract tarball content
-      shell: tar -xzvf file.dest
+      shell: tar -xzvf {{ file.dest }} -C /tmp/classis_data
 
     - name: replace eportfolio directory
-      shell: mv /tmp/eportfolio {{ eportfolio_directory }}
+      shell: yes | cp -prf /tmp/classis_data/eportfolio/* {{ eportfolio_directory }}/
+
+    - name: empty current database
+      shell: mysql -p{{ db_pass }} -u {{ db_user }} -Nse 'show tables' {{ db_name }} | while read table; do mysql -e "truncate table $table" {{ db_name }}; done
 
     - name: replace database
-      shell: mysql -p{{ db_pass }} -u {{ db_user }} {{ db_name }} < /tmp/classis.sql
+      shell: mysql -p{{ db_pass }} -u {{ db_user }} {{ db_name }} < /tmp/classis_data/classis.sql
 
     - name: add school templates
-      shell: mv /tmp/templates/* {{ templates_directory }}/
+      shell: yes | cp -prf /tmp/classis_data/templates/* {{ templates_directory }}/
 
     - name: move images
-      shell: mv /tmp/images/* {{ application_directory }}/images
+      shell: yes | cp -prf /tmp/classis_data/config/images/* {{ application_directory }}/images/
 
     - name: replace school config files
-      shell: mv /tmp/config/{{item}} {{ application_directory }}
+      shell: cp -prf /tmp/classis_data/config/{{item}} {{ application_directory }}/
       with_items:
         - school.php
         - schoolarrays.php
         - schoollang.php
+
+    - name: remove classis import dir
+      file: dest=/tmp/classis_data state=absent
+
+    - name: remove classis data tarball
+      file: dest={{ file.dest }} state=absent
+
+    - name: replace important lines in school.php file
+      lineinfile:
+        dest: "{{ application_directory }}/school.php"
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      with_items:
+        - { regexp: '^\$CFG-\>siteaddress', line: "$CFG->siteaddress='{{ application_url }}';" }
+        - { regexp: '^\$CFG-\>sitepath', line: "$CFG->sitepath='/{{ toplevel_directory }}';" }
+        - { regexp: '^\$CFG-\>installpath', line: "$CFG->installpath='{{ application_directory }}';" }
+        - { regexp: '^\$CFG-\>applicationdirectory', line: "$CFG->applicationdirectory='{{ classis_directory }}';" }
+        - { regexp: '^\$CFG-\>eportfolio_dataroot', line: "$CFG->eportfolio_dataroot='{{ eportfolio_directory }}';" }
+        - { regexp: '^\$CFG-\>classlog', line: "$CFG->classlog='{{ eportfolio_directory }}/classerrors.xml';" }
+        - { regexp: '^\$CFG-\>serverlog', line: "$CFG->serverlog='{{ eportfolio_directory }}/myerrors.html';" }
+        - { regexp: '^\$CFG-\>wkhtml2pdf', line: "$CFG->wkhtml2pdf='/usr/local/bin/wkhtmltopdf';" }
