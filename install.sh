@@ -65,10 +65,16 @@ if  [ "$env" == "production" ]; then
 		apache_site="default-ssl.conf"
 		default_http_port=443
 
-		echo "Please type the full path to the SSL certificate (Example: /home/$user/mycertificate.crt):"
+		default_cert_file_path="/etc/ssl/certs/ssl-cert-snakeoil.pem"
+		echo "Please type the full path to the SSL certificate (Example: /home/$user/mycertificate.crt) | Default: $default_cert_file_path :"
 		read certificate_file_path
-		echo "Please type the full path to the SSL key: (Example: /home/$user/mycertificate.key)"
+		certificate_file_path=${certificate_file_path:-$default_cert_file_path}
+
+		default_cert_key_file_path="/etc/ssl/private/ssl-cert-snakeoil.key"
+
+		echo "Please type the full path to the SSL key: (Example: /home/$user/mycertificate.key) | Default: $default_cert_key_file_path"
 		read certificate_key_file_path
+		certificate_key_file_path=${certificate_key_file_path:-$default_cert_key_file_path}
 
 		http="https"
 	else
@@ -80,7 +86,7 @@ if  [ "$env" == "production" ]; then
 	http_port=${http_port:-$default_http_port}
 
 	apache_error_log_path="\${APACHE_LOG_DIR}"
-    apache_access_log_path="\${APACHE_LOG_DIR}"
+	apache_access_log_path="\${APACHE_LOG_DIR}"
 
 	application_url="$host"
 	if [ "$http_port" != "$default_http_port" ]; then
