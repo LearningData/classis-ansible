@@ -33,4 +33,4 @@ school_logo_path:
 password_short_keyword: guest
 classis_administrator_password: administrator
 application_url: localhost:8080
-repository: git@github.com:LearningData/classis.git
+repository: git@github.com:LearningData/class.git
