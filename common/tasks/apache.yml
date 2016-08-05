@@ -8,8 +8,6 @@
 
 - name: disable site
   command: a2dissite {{ apache_site }}
-  notify:
-    - restart apache
 
 - name: create base directory
   file: dest={{ base_directory }} state=directory follow=yes owner={{ user }} group=www-data mode=0750 recurse=yes
@@ -22,19 +20,13 @@
 
 - name: enabled mod_rewrite
   apache2_module: name=rewrite state=present
-  notify:
-    - restart apache
 
 - name: enable ssl
   command: a2enmod ssl
   when: ssl == 'on'
-  notify:
-    - restart apache
 
 - name: enable site
   command: a2ensite {{ apache_site }}
-  notify:
-    - restart apache
 
 - name: restart apache
   service: name=apache2 state=restarted

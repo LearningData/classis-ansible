@@ -2,10 +2,10 @@
   apt: name=php-pear state=present
 
 - name: install latest PEAR/PEAR package
-  pear: name=PEAR state=latest
+  command: pear install PEAR
 
 - name: install pear packages
-  pear: name={{ item }}
+  command: pear install{{ item }}
   with_items:
     - Archive_Tar-1.3.16
     - Auth_SASL-1.0.6
@@ -36,4 +36,4 @@
   failed_when: "channel_result.stderr"
 
 - name: install HTMLPurifier PEAR package
-  pear: name=hp/HTMLPurifier
+  command: pear install hp/HTMLPurifier
