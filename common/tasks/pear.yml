@@ -2,7 +2,8 @@
   apt: name=php-pear state=present
 
 - name: install latest PEAR/PEAR package
-  command: pear install PEAR
+  command: pear install PEAR-1.10.1
+  ignore_errors: yes
 
 - name: install pear packages
   command: pear install{{ item }}
@@ -37,3 +38,4 @@
 
 - name: install HTMLPurifier PEAR package
   command: pear install hp/HTMLPurifier
+  ignore_errors: yes

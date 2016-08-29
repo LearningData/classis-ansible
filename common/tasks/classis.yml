@@ -37,8 +37,11 @@
 - name: create school.php
   template: dest={{ application_directory }}/school.php src=common/files/classis/config/school.php
 
-- name: copy default eportfolio directory
-  synchronize: dest={{ eportfolio_directory }} src=common/files/classis/eportfolio/ recursive=yes
+#- name: copy default eportfolio directory
+#  synchronize: dest={{ eportfolio_directory }} src=common/files/classis/eportfolio/ recursive=yes
+
+- name: create eportfolio directory
+  file: dest={{ eportfolio_directory }} state=directory follow=yes
 
 - name: copy wkhtmltopdf working version to /usr/local/bin
   copy: dest=/usr/local/bin src=common/files/classis/utils/wkhtmltopdf mode=0775
