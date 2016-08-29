@@ -48,16 +48,16 @@
   mysql_db: name={{ db_name }} state=present collation=utf8_general_ci
 
 - name: grant privileges class db user
-  mysql_user: name={{ db_user }} password={{ db_pass }} priv=*.*:ALL state=present
+  mysql_user: name="{{ db_user }}" password="{{ db_pass }}" priv=*.*:ALL state=present
 
 - name: copy empty_database.sql to /tmp
   copy: dest=/tmp src=common/files/classis/database.sql
 
 - name: import default database
-  shell: mysql -f -p{{ db_pass }} -u {{ db_user }} {{ db_name }} < /tmp/database.sql
+  shell: mysql -f -p"{{ db_pass }}" -u "{{ db_user }}" {{ db_name }} < /tmp/database.sql
 
 - name: update classis administrator password
-  command: mysql -p{{ db_pass }} -u {{ db_user }} {{ db_name }} -e "UPDATE users SET passwd=md5('{{ classis_administrator_password }}') WHERE username='administrator';"
+  command: mysql -p"{{ db_pass }}" -u "{{ db_user }}" {{ db_name }} -e "UPDATE users SET passwd=md5('{{ classis_administrator_password }}') WHERE username='administrator';"
 
 - name: generate fees password
   shell: date | md5sum | head -c${1:-10};echo;
@@ -77,7 +77,7 @@
   copy: dest=/home/{{user}}/classis_fees_passwords content={{ classis_fees_password }}
 
 - name: update fees passwords
-  command: mysql -p{{ db_pass }} -u {{ db_user }} {{ db_name }} -e "UPDATE fees_account SET bankname=AES_ENCRYPT('{{ fees_pass.stdout }}', '{{ fees_pin.stdout }}') WHERE id=1 AND guardian_id=0;"
+  command: mysql -p"{{ db_pass }}" -u "{{ db_user }}" {{ db_name }} -e "UPDATE fees_account SET bankname=AES_ENCRYPT('{{ fees_pass.stdout }}', '{{ fees_pin.stdout }}') WHERE id=1 AND guardian_id=0;"
 
 - name: restart mysql
   service: name=mysql state=restarted
